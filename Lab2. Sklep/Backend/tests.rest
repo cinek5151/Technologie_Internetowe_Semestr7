@@ -1,0 +1,77 @@
+@baseUrl = http://localhost:3000/api
+
+### 1. Produkty - Pobierz wszystkie produkty
+GET {{baseUrl}}/products
+Content-Type: application/json
+
+### 2. Produkty - Dodaj nowy produkt (Produkt 1)
+# @name createProduct1
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{
+    "name": "Laptop Pro",
+    "price": 4500
+}
+
+### 3. Produkty - Dodaj nowy produkt (Produkt 2)
+# @name createProduct2
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{
+    "name": "Mysz bezprzewodowa",
+    "price": 150
+}
+
+### Zmienne pomocnicze (ustaw ID po stworzeniu produktów powyżej)
+@productId = 1
+
+### 4. Koszyk - Dodaj produkt do koszyka
+POST {{baseUrl}}/cart/add
+Content-Type: application/json
+
+{
+    "productId": {{productId}},
+    "qty": 2
+}
+
+### 5. Koszyk - Pobierz zawartość koszyka
+GET {{baseUrl}}/cart
+Content-Type: application/json
+
+### 6. Koszyk - Aktualizuj ilość produktu w koszyku
+PATCH {{baseUrl}}/cart/item
+Content-Type: application/json
+
+{
+    "productId": {{productId}},
+    "qty": 5
+}
+
+### 7. Koszyk - Usuń produkt z koszyka
+DELETE {{baseUrl}}/cart/item/{{productId}}
+Content-Type: application/json
+
+### 8. Checkout - Złóż zamówienie (zamienia zawartość koszyka w zamówienie)
+# Przed uruchomieniem upewnij się, że masz coś w koszyku (wykonaj krok 4)
+POST {{baseUrl}}/checkout
+Content-Type: application/json
+
+### 9. Test walidacji - Dodaj produkt z ujemną ilością (Błąd 409)
+POST {{baseUrl}}/cart/add
+Content-Type: application/json
+
+{
+    "productId": {{productId}},
+    "qty": -1
+}
+
+### 10. Test walidacji - Dodaj nieistniejący produkt (Błąd 404)
+POST {{baseUrl}}/cart/add
+Content-Type: application/json
+
+{
+    "productId": 9999,
+    "qty": 1
+}
