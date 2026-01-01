@@ -1,0 +1,74 @@
+### Zmienne globalne
+@baseUrl = http://localhost:3000/api
+@contentType = application/json
+
+# ==========================================
+# SEKCJA: KSIĄŻKI (Books)
+# ==========================================
+
+### Pobierz wszystkie książki
+GET {{baseUrl}}/books
+Accept: {{contentType}}
+
+### Pobierz konkretną książkę po ID (zmień 1 na istniejące ID)
+GET {{baseUrl}}/books/1
+Accept: {{contentType}}
+
+### Dodaj nową książkę
+POST {{baseUrl}}/books
+Content-Type: {{contentType}}
+
+{
+    "title": "Wiedźmin: Ostatnie życzenie",
+    "author": "Andrzej Sapkowski",
+    "copies": 5
+}
+
+# ==========================================
+# SEKCJA: CZŁONKOWIE (Members)
+# ==========================================
+
+### Pobierz wszystkich członków
+GET {{baseUrl}}/members
+Accept: {{contentType}}
+
+### Pobierz członka po ID
+GET {{baseUrl}}/members/1
+Accept: {{contentType}}
+
+### Zarejestruj nowego członka
+POST {{baseUrl}}/members
+Content-Type: {{contentType}}
+
+{
+    "name": "Jan Kowalski",
+    "email": "jan.kowalski@example.com"
+}
+
+# ==========================================
+# SEKCJA: WYPOŻYCZENIA (Loans)
+# ==========================================
+
+### Pobierz historię wszystkich wypożyczeń
+GET {{baseUrl}}/loans
+Accept: {{contentType}}
+
+### Wypożycz książkę
+# Pamiętaj, aby podać ID istniejącej książki i członka!
+POST {{baseUrl}}/loans/borrow
+Content-Type: {{contentType}}
+
+{
+    "bookId": 1,
+    "memberId": 1,
+    "loan_date": "2025-05-20",
+    "due_date": "2025-06-20"
+}
+
+### Zwróć książkę
+POST {{baseUrl}}/loans/return
+Content-Type: {{contentType}}
+
+{
+    "loanId": 1
+}
