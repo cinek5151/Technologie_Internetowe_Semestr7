@@ -1,1 +1,1 @@
-Technologie Internetowe Semestr 7. Zadania na Laboratorium
+Technologie Internetowe Semestr 7. Zadania na Laboratorium. Kopczyński Adrian Z706
