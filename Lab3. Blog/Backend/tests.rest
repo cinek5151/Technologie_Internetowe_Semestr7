@@ -1,0 +1,61 @@
+### Zmienne
+@baseUrl = http://localhost:3000/api
+@postId = 1
+@commentId = 1
+
+### 1. Pobierz wszystkie posty
+GET {{baseUrl}}/posts
+Accept: application/json
+
+
+
+### 2. Utwórz nowy post
+POST {{baseUrl}}/posts
+Content-Type: application/json
+
+{
+    "title": "Mój pierwszy post",
+    "body": "To jest treść posta testowego."
+}
+
+
+
+### 3. Dodaj komentarz do posta (wymaga poprawnego @postId)
+POST {{baseUrl}}/posts/{{postId}}/comments
+Content-Type: application/json
+
+{
+    "author": "Jan Kowalski",
+    "body": "Bardzo ciekawy wpis!"
+}
+
+
+
+### 4. Pobierz zatwierdzone komentarze dla posta
+# Uwaga: Początkowo lista może być pusta, dopóki komentarz nie zostanie zatwierdzony
+GET {{baseUrl}}/posts/{{postId}}/comments
+Accept: application/json
+
+
+
+### 5. Zatwierdź komentarz (wymaga poprawnego @commentId)
+POST {{baseUrl}}/comments/{{commentId}}/approve
+Content-Type: application/json
+
+
+
+### 6. Ponowne zatwierdzenie komentarza (powinno zwrócić błąd 409)
+POST {{baseUrl}}/comments/{{commentId}}/approve
+Content-Type: application/json
+
+
+
+### 7. Próba pobrania komentarzy po zatwierdzeniu
+GET {{baseUrl}}/posts/{{postId}}/comments
+Accept: application/json
+
+
+
+### 8. Pobierz komentarze oczekujące na zatwierdzenie
+GET {{baseUrl}}/comments/to-approve
+Accept: application/json    

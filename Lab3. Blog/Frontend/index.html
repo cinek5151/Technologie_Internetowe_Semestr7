@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Blog</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Sklep</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="index.html"
+                >Posty</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="moderation.html">Moderacja</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container mt-4">
+      <h1>Witamy na Blogu</h1>
+      <p>Lista postów</p>
+
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#addPostModal"
+      >
+        Dodaj post
+      </button>
+
+      <div class="mt-4" id="posts_wrapper"></div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="addPostModal"
+      tabindex="-1"
+      aria-labelledby="addPostModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="addPostModalLabel">Dodaj post</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="productName" class="form-label">Tytuł postu</label>
+              <input
+                type="text"
+                class="form-control"
+                id="title"
+                placeholder="Tytuł postu"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="bookAuthor" class="form-label">Treść postu</label>
+              <textarea
+                rows="10"
+                type="text"
+                class="form-control"
+                id="body"
+                placeholder="Treść postu"
+              ></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              id="closePostModal"
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Anuluj
+            </button>
+            <button type="button" class="btn btn-primary" id="addPostButton">
+              Zapisz
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="postCommentsModal"
+      tabindex="-1"
+      aria-labelledby="postCommentsModalLabel"
+      aria-hidden="true"
+    >
+      <input type="hidden" id="currentPostComments" />
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="postCommentsModalLabel">
+              Komentarze do posta
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div id="comments_wrapper"></div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Zamknij
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="addCommentModal"
+      tabindex="-1"
+      aria-labelledby="addCommentModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="addCommentModalLabel">
+              Dodaj komentarz
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="productName" class="form-label"
+                >Autor komentarza</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="commentAuthor"
+                placeholder="Autor komentarza"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="bookAuthor" class="form-label"
+                >Treść komentarza</label
+              >
+              <textarea
+                rows="5"
+                type="text"
+                class="form-control"
+                id="commentBody"
+                placeholder="Treść komentarza"
+              ></textarea>
+            </div>
+            <input type="hidden" id="commentPostId" />
+          </div>
+          <div class="modal-footer">
+            <button
+              id="closeAddCommentModal"
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Anuluj
+            </button>
+            <button type="button" class="btn btn-primary" id="addCommentButton">
+              Zapisz
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="js/comments.js"></script>
+    <script src="js/posts.js"></script>
+  </body>
+</html>
